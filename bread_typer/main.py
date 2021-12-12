@@ -63,4 +63,7 @@ def main():
     Displayer.print_string(score._accuracy)
 
     # end of program
+
+# call main
+main()
     
