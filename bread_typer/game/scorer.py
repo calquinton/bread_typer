@@ -1,5 +1,4 @@
 # imports
-from game.timer import Timer
 import re
 
 class Scorer:
@@ -24,7 +23,7 @@ class Scorer:
 
         # count  and return the number of differences between the strings, adding
         # the difference in length in case one is longer than the other
-        return sum(1 for a, b in zip(string_1, string_2) if a != b) + abs(len(string_1) - len(string_2)) # from Ryan Haining on stackoverflow
+        return sum(1 for a, b in zip(string_1, string_2) if a != b) + abs(len(string_1) - len(string_2))
 
 
     def calculate_accuracy(self, original_string, new_string):
@@ -38,17 +37,17 @@ class Scorer:
         num_differences = self.calculate_num_differences(original_string, new_string)
 
         # return accuracy as percentage of differences
-        return (len(original_string) - num_differences) / num_differences
+        return round((len(original_string) - num_differences) / len(original_string) * 100, 2)
     
 
-    def calculate_wpm(self, typed_string, minutes):
+    def calculate_wpm(self, typed_string, typing_time_seconds):
         '''
         Calculates gross words per minute from a string and the
-        given time in minutes that it took to type.
+        given time in seconds that it took to type.
         '''
 
         # find the number of words in the string
-        num_words = len(re.findall(r'\w+', typed_string)) # from biswasarkadip on geeksforgeeks
+        num_words = len(re.findall(r'\w+', typed_string))
 
         # calculate and return wpm
-        return num_words / minutes
+        return round(num_words / typing_time_seconds * 60, 2)

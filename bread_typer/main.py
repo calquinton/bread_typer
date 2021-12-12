@@ -12,57 +12,58 @@ def main():
     Controls the entire program by calling
     class functions.
     '''
+    # create objects for classes
+    displayer = Displayer()
+    quotes = Quotes()
+    scorer = Scorer()
+    timer = Timer()
+    typer = Typer()
     
-    # get quotes_list from Quotes
-    quotes_list = Quotes.create_quotes_list()
+    # get quotes_list from quotes
+    quotes_list = quotes.create_quotes_list()
 
     # get random list from quotes_list
-    quote_list = quotes_list[random.randint(1, len(quotes_list))]
+    quote_list = quotes_list[random.randint(0, len(quotes_list) - 1)]
 
-    quote = quote_list[1]
-    quote_source = quote_list[2]
+    quote = quote_list[0]
+    quote_source = quote_list[1]
 
     # display quote
-    Displayer.print_string(quote)
+    displayer.print_string(quote)
 
     # start timer
-    start_time = Timer.check_current_time()
+    start_time = timer.check_current_time()
 
     # accept player input
-    player_input = Typer.get_input()
+    player_input = typer.get_input()
 
     # end timer
-    end_time = Timer.check_current_time()
+    end_time = timer.check_current_time()
 
     # calculate time spent typing
-    typing_time_seconds = Timer.calculate_time_difference(start_time, end_time)
+    typing_time = timer.calculate_time_difference(start_time, end_time)
 
     # convert typing time to minutes
-    typing_time_minutes = Timer.convert_seconds_to_minutes(typing_time_seconds)
-
-    # create Scorer object
-    score = Scorer()
+    # typing_time_minutes = timer.convert_seconds_to_minutes(typing_time_seconds)
 
     # calculate words per minute, stored in score object
-    score._wpm = Scorer.calculate_wpm(player_input, typing_time_minutes)
+    scorer._wpm = scorer.calculate_wpm(player_input, typing_time)
 
     # calculate accuracy, stored in score object
-    score._accuracy = Scorer.calculate_accuracy(quote, player_input)
+    scorer._accuracy = scorer.calculate_accuracy(quote, player_input)
 
     # display quote source
-    Displayer.print_string(constants.CREDIT_STRING)
-    Displayer.print_string(quote_source)
+    displayer.print_string(constants.CREDIT_STRING)
+    displayer.print_string(quote_source)
 
     # display score
     # wpm
-    Displayer.print_string(constants.SCORE_WPM_STRING)
-    Displayer.print_string(score._wpm)
+    displayer.print_string(constants.SCORE_WPM_STRING)
+    displayer.print_string(scorer._wpm)
 
     # accuracy
-    Displayer.print_string(constants.SCORE_ACCURACY_STRING)
-    Displayer.print_string(score._accuracy)
-
-    # end of program
+    displayer.print_string(constants.SCORE_ACCURACY_STRING)
+    displayer.print_string(scorer._accuracy)
 
 # call main
 main()

@@ -19,7 +19,7 @@ class Timer:
         '''
 
         # return the current time
-        return time.process_time
+        return time.time()
 
     
     def calculate_time_difference(self, start_time, end_time):
@@ -43,4 +43,3 @@ class Timer:
 
         # return minutes converted from seconds
         return seconds / 60
-        
